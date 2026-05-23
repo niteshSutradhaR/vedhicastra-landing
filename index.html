@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>VedhicAstra – AI Vedic Astrology for Practical Guidance</title>
+  <meta name="description" content="VedhicAstra is an AI-powered Vedic astrology platform for practical guidance, chart intelligence, timing insights, and professional decision support." />
+  <meta name="keywords" content="VedhicAstra, Vedic Astrology, AI Astrology, AstroState, Astrology for Professionals, Birth Chart, Vimshottari Dasha, Navamsa, Navatara Chakra" />
+  <meta name="author" content="VedhicAstra" />
+  <meta name="theme-color" content="#05150b" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="VedhicAstra – AI Vedic Astrology for Practical Guidance" />
+  <meta property="og:description" content="AstroState → Signals → Insights. Practical Vedic astrology guidance powered by deterministic chart intelligence and AI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vedhicastra.com" />
+
+  <!-- CDNs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #031008;
+      --bg-2: #061b0d;
+      --panel: rgba(6, 32, 15, 0.78);
+      --panel-strong: rgba(10, 48, 18, 0.9);
+      --green: #123f11;
+      --green-2: #1d5b16;
+      --gold: #ffe46b;
+      --gold-2: #ffd21f;
+      --cream: #fff4b8;
+      --mint: #dfffee;
+      --muted: #b7cfae;
+      --line: rgba(255, 226, 56, 0.32);
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.5);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--cream);
+      background:
+        radial-gradient(circle at 20% 5%, rgba(255, 214, 38, 0.13), transparent 24%),
+        radial-gradient(circle at 85% 15%, rgba(106, 255, 72, 0.13), transparent 26%),
+        linear-gradient(180deg, #041108 0%, #020905 54%, #061307 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 226, 56, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 226, 56, 0.045) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(circle at center, black 0%, transparent 78%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto 0 0;
+      height: 130px;
+      background: linear-gradient(to top, rgba(4, 19, 8, 0.95), transparent);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .nav-wrap {
+      position: sticky;
+      top: 14px;
+      z-index: 30;
+      padding-top: 14px;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(4, 31, 11, 0.8);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: max-content;
+    }
+
+    .logo-mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      color: #752d00;
+      background:
+        radial-gradient(circle at 50% 50%, #fff6bd 0 22%, transparent 23%),
+        conic-gradient(from 45deg, #fff1a6, #ffbd1e, #ff7b18, #ffe97a, #fff1a6);
+      border: 2px solid rgba(255, 234, 95, 0.7);
+      box-shadow: 0 0 0 4px rgba(255, 207, 31, 0.08), 0 0 28px rgba(255, 216, 36, 0.5);
+      overflow: hidden;
+    }
+
+    .logo-mark::before,
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      width: 74%;
+      height: 2px;
+      background: rgba(145, 64, 0, 0.55);
+      transform: rotate(45deg);
+    }
+
+    .logo-mark::after {
+      transform: rotate(-45deg);
+    }
+
+    .logo-mark span {
+      position: relative;
+      z-index: 1;
+      font-size: 26px;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.25));
+    }
+
+    .brand-text strong {
+      font-family: "Baloo 2", cursive;
+      display: block;
+      font-size: 30px;
+      line-height: 0.9;
+      letter-spacing: -0.7px;
+      color: #fff7b0;
+    }
+
+    .brand-text small {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
+
+    .beta {
+      padding: 1px 8px;
+      border: 1px solid rgba(255, 228, 107, 0.7);
+      border-radius: 999px;
+      font-size: 11px;
+      color: var(--gold);
+      background: rgba(255, 228, 107, 0.08);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px;
+      border: 1px solid rgba(255, 226, 56, 0.18);
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .nav-links a {
+      font-weight: 800;
+      color: #f5f0b9;
+      padding: 11px 14px;
+      border-radius: 10px;
+      transition: 0.2s ease;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: rgba(255, 226, 56, 0.12);
+      color: #fff36e;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mobile-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 226, 56, 0.08);
+      color: var(--gold);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 226, 56, 0.45);
+      font-weight: 900;
+      transition: 0.24s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #fff18c, #ffd21f);
+      color: #1e1600;
+      box-shadow: 0 18px 42px rgba(255, 210, 31, 0.18);
+    }
+
+    .btn-secondary {
+      color: #fff5a9;
+      background: rgba(255, 226, 56, 0.07);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 50px rgba(0,0,0,0.22);
+    }
+
+    .hero {
+      padding: 36px 0 50px;
+    }
+
+    .hero-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      min-height: 620px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 35% 24%, rgba(115, 255, 45, 0.17), transparent 32%),
+        linear-gradient(135deg, rgba(5, 28, 10, 0.96), rgba(18, 69, 8, 0.72));
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(0,0,0,0.4), transparent 48%, rgba(255, 226, 56, 0.05));
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      padding: clamp(30px, 6vw, 58px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      width: max-content;
+      padding: 8px 13px;
+      border: 1px solid rgba(255, 226, 56, 0.52);
+      border-radius: 999px;
+      background: rgba(255, 226, 56, 0.08);
+      color: #fff36e;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: "Baloo 2", cursive;
+      font-weight: 800;
+      font-size: clamp(52px, 8vw, 96px);
+      line-height: 0.9;
+      letter-spacing: -2.4px;
+      color: #ffe878;
+      text-wrap: balance;
+      margin-bottom: 22px;
+      max-width: 800px;
+    }
+
+    .lead {
+      color: #fff7c4;
+      font-size: clamp(18px, 2vw, 23px);
+      line-height: 1.55;
+      font-weight: 700;
+      max-width: 720px;
+      margin-bottom: 16px;
+    }
+
+    .sublead {
+      color: #d8ead1;
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 670px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .mini-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 226, 56, 0.22);
+      background: rgba(0, 0, 0, 0.2);
+      color: #e9ffe5;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+      min-height: 520px;
+      border-left: 1px solid rgba(255, 226, 56, 0.18);
+      background:
+        linear-gradient(rgba(255, 226, 56, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 226, 56, 0.07) 1px, transparent 1px),
+        radial-gradient(circle at center, rgba(255, 226, 56, 0.18), transparent 44%),
+        rgba(22, 63, 8, 0.32);
+      background-size: 48px 48px, 48px 48px, auto, auto;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .zodiac-orb {
+      width: min(78%, 420px);
+      aspect-ratio: 1 / 1;
+      border: 1px solid rgba(255, 226, 56, 0.36);
+      border-radius: 50%;
+      position: relative;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle, rgba(255, 226, 56, 0.2), transparent 42%),
+        rgba(0,0,0,0.12);
+      box-shadow: inset 0 0 60px rgba(255, 226, 56, 0.08), 0 0 80px rgba(255, 226, 56, 0.1);
+      animation: float 5.4s ease-in-out infinite;
+    }
+
+    .zodiac-orb::before {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      border: 1px dashed rgba(255, 226, 56, 0.35);
+      border-radius: 50%;
+      animation: spin 28s linear infinite;
+    }
+
+    .zodiac-orb::after {
+      content: "";
+      position: absolute;
+      inset: 26%;
+      border: 1px solid rgba(255, 226, 56, 0.25);
+      transform: rotate(45deg);
+    }
+
+    .orb-text {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .orb-text strong {
+      display: block;
+      font-family: "Baloo 2", cursive;
+      font-size: clamp(54px, 7vw, 82px);
+      line-height: 0.9;
+      color: #fff6a3;
+    }
+
+    .orb-text span {
+      display: block;
+      color: #ffe878;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-top: 12px;
+      text-transform: uppercase;
+    }
+
+    .orbit-tag {
+      position: absolute;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 226, 56, 0.33);
+      background: rgba(3, 16, 8, 0.72);
+      color: #fff4a6;
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    .orbit-tag.one { top: 14%; left: 7%; }
+    .orbit-tag.two { right: 8%; top: 24%; }
+    .orbit-tag.three { bottom: 14%; left: 14%; }
+
+    section {
+      padding: 54px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      font-family: "Baloo 2", cursive;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1;
+      color: var(--gold-2);
+      letter-spacing: -0.8px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.65;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card,
+    .status-card,
+    .waitlist-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(11, 50, 18, 0.78), rgba(3, 15, 8, 0.8));
+      box-shadow: 0 18px 55px rgba(0,0,0,0.22);
+    }
+
+    .feature-card {
+      padding: 24px;
+      min-height: 250px;
+      transition: 0.25s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 226, 56, 0.58);
+    }
+
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255, 226, 56, 0.12);
+      color: var(--gold);
+      border: 1px solid rgba(255, 226, 56, 0.24);
+      margin-bottom: 18px;
+      font-size: 20px;
+    }
+
+    .feature-card h3 {
+      color: #fff5a6;
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: #cce3c5;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .status-wrap {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .status-card {
+      padding: 28px;
+    }
+
+    .status-card h2 {
+      font-family: "Baloo 2", cursive;
+      font-size: 42px;
+      color: var(--gold-2);
+      line-height: 1;
+      margin: 12px 0;
+    }
+
+    .status-card p {
+      color: #d9edcf;
+      line-height: 1.7;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 15px;
+      border: 1px solid rgba(255, 226, 56, 0.15);
+      border-radius: 16px;
+      background: rgba(0,0,0,0.16);
+    }
+
+    .timeline-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 226, 56, 0.12);
+      border: 1px solid rgba(255, 226, 56, 0.3);
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .timeline-item strong {
+      color: #fff4a6;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .timeline-item span {
+      color: #bcd9b7;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .waitlist-card {
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 1fr 0.8fr;
+      gap: 24px;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .waitlist-card::before {
+      content: "";
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      right: -80px;
+      top: -80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 226, 56, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .waitlist-card h2 {
+      font-family: "Baloo 2", cursive;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1;
+      color: var(--gold-2);
+      margin-bottom: 12px;
+    }
+
+    .waitlist-card p {
+      color: #d5eccd;
+      line-height: 1.7;
+      max-width: 680px;
+    }
+
+    .waitlist-form {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 12px;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 226, 56, 0.25);
+      border-radius: 14px;
+      background: rgba(1, 8, 4, 0.72);
+      color: #fffbd2;
+      padding: 15px 16px;
+      font: inherit;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: rgba(255, 226, 56, 0.72);
+      box-shadow: 0 0 0 4px rgba(255, 226, 56, 0.08);
+    }
+
+    .note {
+      color: #a9cba3;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 60;
+      width: min(420px, calc(100% - 36px));
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 226, 56, 0.4);
+      background: rgba(3, 16, 8, 0.95);
+      color: #fff6b4;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.35);
+      transform: translateY(18px);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.25s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    footer {
+      position: relative;
+      z-index: 11;
+      border-top: 1px solid rgba(255, 226, 56, 0.18);
+      background: rgba(2, 12, 6, 0.72);
+      padding: 28px 0;
+      color: #a9cba3;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #fff2a0;
+      font-weight: 800;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    @media (max-width: 980px) {
+      .navbar {
+        align-items: flex-start;
+      }
+
+      .mobile-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        left: 18px;
+        right: 18px;
+        top: 92px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        background: rgba(4, 31, 11, 0.96);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-cta {
+        margin-left: auto;
+      }
+
+      .hero-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 420px;
+        border-left: 0;
+        border-top: 1px solid rgba(255, 226, 56, 0.18);
+      }
+
+      .grid-3,
+      .status-wrap,
+      .waitlist-card {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 12px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .brand-text strong {
+        font-size: 24px;
+      }
+
+      .logo-mark {
+        width: 46px;
+        height: 46px;
+      }
+
+      .nav-cta .btn-secondary {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 22px;
+      }
+
+      .hero-copy {
+        padding: 28px 22px;
+      }
+
+      h1 {
+        font-size: 54px;
+        letter-spacing: -1.3px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-actions {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 360px;
+      }
+
+      .orbit-tag {
+        display: none;
+      }
+
+      .footer-inner {
+        display: block;
+      }
+
+      .footer-links {
+        margin-top: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav-wrap">
+    <div class="container">
+      <nav class="navbar" aria-label="Primary navigation">
+        <a class="brand" href="#home" aria-label="VedhicAstra home">
+          <div class="logo-mark"><span>✦</span></div>
+          <div class="brand-text">
+            <strong>VedhicAstra <span class="beta">BETA</span></strong>
+            <small>AI Vedic Astrology</small>
+          </div>
+        </a>
+
+        <div class="nav-links" id="navLinks">
+          <a href="#home" class="active">Home</a>
+          <a href="#features">Features</a>
+          <a href="#status">Status</a>
+          <a href="#waitlist">Early Access</a>
+        </div>
+
+        <div class="nav-cta">
+          <a class="btn btn-secondary" href="https://www.linkedin.com/in/nitesh-n-sutradhar/" target="_blank" rel="noopener">LinkedIn</a>
+          <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-copy" data-aos="fade-up">
+            <div class="eyebrow"><i class="fa-solid fa-sparkles"></i> Platform upgrade in progress</div>
+            <h1>AI Astrology for practical guidance</h1>
+            <p class="lead">Personalized Vedic chart intelligence for career, finance, timing, decisions, and self-awareness.</p>
+            <p class="sublead">
+              VedhicAstra is being upgraded into a deterministic astrology intelligence system:
+              <strong>AstroState → Signals → Insights</strong>. The full app experience will reopen soon.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#waitlist"><i class="fa-solid fa-arrow-right"></i> Join Early Access</a>
+              <a class="btn btn-secondary" href="#features"><i class="fa-solid fa-chart-simple"></i> Explore Vision</a>
+            </div>
+
+            <div class="mini-proof">
+              <span class="chip"><i class="fa-solid fa-circle-check"></i> Birth chart guidance</span>
+              <span class="chip"><i class="fa-solid fa-circle-check"></i> Dasha timing</span>
+              <span class="chip"><i class="fa-solid fa-circle-check"></i> Navamsa insights</span>
+              <span class="chip"><i class="fa-solid fa-circle-check"></i> AI console</span>
+            </div>
+          </div>
+
+          <div class="hero-visual" data-aos="fade-left" data-aos-delay="150">
+            <div class="zodiac-orb" aria-label="VedhicAstra zodiac reading visual">
+              <div class="orbit-tag one">AstroState</div>
+              <div class="orbit-tag two">Signals</div>
+              <div class="orbit-tag three">Insights</div>
+              <div class="orb-text">
+                <strong id="signRotator">Aries</strong>
+                <span>Daily Guidance</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-head" data-aos="fade-up">
+          <h2>Built for seekers and professionals</h2>
+          <p>
+            The goal is not vague prediction. VedhicAstra translates chart factors into useful guidance,
+            timing context, and practical next steps.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="feature-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="icon-box"><i class="fa-solid fa-user-astronaut"></i></div>
+            <h3>Personalized Chart Guidance</h3>
+            <p>Ask focused questions, explore your birth profile, and understand the chart basis behind each insight.</p>
+          </article>
+
+          <article class="feature-card" data-aos="fade-up" data-aos-delay="80">
+            <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
+            <h3>AI Astrology Console</h3>
+            <p>A modern astrology assistant designed to explain patterns, strengths, cautions, and next steps clearly.</p>
+          </article>
+
+          <article class="feature-card" data-aos="fade-up" data-aos-delay="160">
+            <div class="icon-box"><i class="fa-solid fa-clock"></i></div>
+            <h3>Timing Intelligence</h3>
+            <p>Use Vimshottari dashas, transit signals, Navamsa triggers, and daily focus layers for better timing.</p>
+          </article>
+
+          <article class="feature-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="icon-box"><i class="fa-solid fa-chart-pie"></i></div>
+            <h3>Insight Panels</h3>
+            <p>Structured dashboards for strengths, risks, patterns, remedies, and decision support.</p>
+          </article>
+
+          <article class="feature-card" data-aos="fade-up" data-aos-delay="80">
+            <div class="icon-box"><i class="fa-solid fa-dharmachakra"></i></div>
+            <h3>Vedic Depth</h3>
+            <p>D1, D9, dashas, nakshatras, yogas, Navatara Chakra, and practical interpretation in one experience.</p>
+          </article>
+
+          <article class="feature-card" data-aos="fade-up" data-aos-delay="160">
+            <div class="icon-box"><i class="fa-solid fa-shield-heart"></i></div>
+            <h3>Evidence-backed Approach</h3>
+            <p>Every serious insight should map back to chart factors, combinations, or timing signals.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="status">
+      <div class="container">
+        <div class="status-wrap">
+          <div class="status-card" data-aos="fade-right">
+            <div class="eyebrow">Current status</div>
+            <h2>The app is being upgraded.</h2>
+            <p>
+              VedhicAstra is currently running in development while the public platform is being polished.
+              This page is live so visitors, early users, and search engines can find the official brand domain.
+            </p>
+          </div>
+
+          <div class="status-card" data-aos="fade-left">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-number">1</div>
+                <div>
+                  <strong>Static brand page live</strong>
+                  <span>Official VedhicAstra presence while the full application is rebuilt.</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-number">2</div>
+                <div>
+                  <strong>Early access collection</strong>
+                  <span>Interested users can connect and request access before public launch.</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-number">3</div>
+                <div>
+                  <strong>Full app relaunch</strong>
+                  <span>AI Console, dashboards, chart panels, and guided astrology experiences.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="waitlist">
+      <div class="container">
+        <div class="waitlist-card" data-aos="zoom-in">
+          <div>
+            <div class="eyebrow">Early access</div>
+            <h2>Want to try VedhicAstra?</h2>
+            <p>
+              Join the early access list and we’ll reach out when the upgraded experience is available.
+              You can also connect on LinkedIn for ongoing Vedic astrology research and professional guidance posts.
+            </p>
+          </div>
+
+          <form class="waitlist-form" id="waitlistForm">
+            <div class="form-row">
+              <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" />
+              <input id="email" name="email" type="email" placeholder="Your email" autocomplete="email" />
+              <textarea id="message" name="message" placeholder="What guidance are you looking for? Career, finance, timing, personal growth..."></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Request Early Access</button>
+            <p class="note">This opens your email app with a pre-filled early access request. Replace the email address in the code if needed.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> VedhicAstra. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="mailto:support@vedhicastra.com">Email</a>
+        <a href="https://www.linkedin.com/in/nitesh-n-sutradhar/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#home">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">Opening your email app with the early access request...</div>
+
+  <!-- JS CDNs -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init({
+      duration: 750,
+      once: true,
+      easing: "ease-out-cubic"
+    });
+
+    const mobileToggle = document.getElementById("mobileToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    mobileToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+      const icon = mobileToggle.querySelector("i");
+      icon.classList.toggle("fa-bars");
+      icon.classList.toggle("fa-xmark");
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        const icon = mobileToggle.querySelector("i");
+        icon.classList.add("fa-bars");
+        icon.classList.remove("fa-xmark");
+      });
+    });
+
+    const signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"];
+    const signRotator = document.getElementById("signRotator");
+    let signIndex = 0;
+
+    setInterval(() => {
+      signIndex = (signIndex + 1) % signs.length;
+      signRotator.animate([
+        { opacity: 1, transform: "translateY(0)" },
+        { opacity: 0, transform: "translateY(10px)" }
+      ], { duration: 180, fill: "forwards" });
+
+      setTimeout(() => {
+        signRotator.textContent = signs[signIndex];
+        signRotator.animate([
+          { opacity: 0, transform: "translateY(-10px)" },
+          { opacity: 1, transform: "translateY(0)" }
+        ], { duration: 220, fill: "forwards" });
+      }, 190);
+    }, 2200);
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const form = document.getElementById("waitlistForm");
+    const toast = document.getElementById("toast");
+
+    function showToast() {
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3200);
+    }
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const subject = encodeURIComponent("VedhicAstra Early Access Request");
+      const body = encodeURIComponent(
+        `Hello VedhicAstra Team,\n\nI would like to join early access.\n\nName: ${name || "-"}\nEmail: ${email || "-"}\nInterest / Guidance Needed: ${message || "-"}\n\nRegards,\n${name || ""}`
+      );
+
+      showToast();
+      window.location.href = `mailto:support@vedhicastra.com?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
