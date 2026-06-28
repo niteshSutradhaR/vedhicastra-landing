@@ -764,6 +764,9 @@
       }
 
       .grid-3,
+      .course-wrap,
+      .pricing-grid,
+      .philosophy-strip,
       .status-wrap,
       .waitlist-card {
         grid-template-columns: 1fr;
@@ -833,6 +836,158 @@
         margin-top: 14px;
       }
     }
+
+
+    /* Course / Jyotisha Learning Section */
+    .course-wrap {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .course-card,
+    .price-box,
+    .module-card,
+    .philosophy-strip {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(11, 50, 18, 0.82), rgba(3, 15, 8, 0.84));
+      box-shadow: 0 18px 55px rgba(0,0,0,0.22);
+    }
+
+    .course-card {
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .course-card::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -85px;
+      top: -95px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 226, 56, 0.12), transparent 68%);
+      pointer-events: none;
+    }
+
+    .course-card h3 {
+      font-family: "Baloo 2", cursive;
+      font-size: clamp(30px, 3vw, 42px);
+      line-height: 1;
+      color: var(--gold-2);
+      margin: 12px 0;
+    }
+
+    .course-card p {
+      color: #d9edcf;
+      line-height: 1.7;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .course-list {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .course-list li {
+      list-style: none;
+      color: #d7edd0;
+      line-height: 1.5;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .course-list li i {
+      color: var(--gold);
+      margin-top: 4px;
+      font-size: 13px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 18px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-box {
+      padding: 18px;
+      background: rgba(0,0,0,0.18);
+    }
+
+    .price-box span {
+      display: block;
+      color: #cce3c5;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .price-box strong {
+      display: block;
+      color: var(--gold-2);
+      font-family: "Baloo 2", cursive;
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .price-box small {
+      display: block;
+      color: var(--muted);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    .course-modules {
+      margin-top: 18px;
+    }
+
+    .course-modules .feature-card {
+      min-height: 220px;
+    }
+
+    .philosophy-strip {
+      margin-top: 18px;
+      padding: 22px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      text-align: center;
+    }
+
+    .philosophy-item {
+      padding: 14px 10px;
+      border-right: 1px dashed rgba(255, 226, 56, 0.24);
+    }
+
+    .philosophy-item:last-child {
+      border-right: none;
+    }
+
+    .philosophy-item i {
+      color: var(--gold);
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .philosophy-item strong {
+      color: #fff4a6;
+      display: block;
+      line-height: 1.25;
+    }
+
   </style>
 </head>
 
@@ -851,6 +1006,7 @@
         <div class="nav-links" id="navLinks">
           <a href="#home" class="active">Home</a>
           <a href="#features">Features</a>
+          <a href="#course">Course</a>
           <a href="#status">Status</a>
           <a href="#waitlist">Early Access</a>
         </div>
@@ -887,6 +1043,7 @@
               <span class="chip"><i class="fa-solid fa-circle-check"></i> Birth chart guidance</span>
               <span class="chip"><i class="fa-solid fa-circle-check"></i> Dasha timing</span>
               <span class="chip"><i class="fa-solid fa-circle-check"></i> Navamsa insights</span>
+              <span class="chip"><i class="fa-solid fa-circle-check"></i> Jyotisha learning</span>
               <span class="chip"><i class="fa-solid fa-circle-check"></i> AI console</span>
             </div>
           </div>
@@ -956,6 +1113,89 @@
       </div>
     </section>
 
+
+    <section id="course">
+      <div class="container">
+        <div class="section-head" data-aos="fade-up">
+          <div>
+            <div class="eyebrow">Jyotisha learning</div>
+            <h2>Jyotisha Foundations as Spiritual Sadhana</h2>
+          </div>
+          <p>
+            A structured foundation course for sincere Indian and international seekers who want to study
+            Jyotisha as a sacred Vedanga — with clarity, reflection, and spiritual grounding.
+          </p>
+        </div>
+
+        <div class="course-wrap">
+          <article class="course-card" data-aos="fade-right">
+            <div class="eyebrow">6 core modules</div>
+            <h3>Learn at your own pace, with guided support</h3>
+            <p>
+              This course introduces Jyotisha through grahas, rashis, bhavas, nakshatras,
+              chart structure, dashas, transits, remedies, mantra, seva, and sadhana alignment.
+            </p>
+            <p>
+              The focus is not fear-based prediction. The aim is to understand karma, dharma,
+              time, self-observation, and responsible spiritual interpretation.
+            </p>
+            <ul class="course-list">
+              <li><i class="fa-solid fa-circle-check"></i><span>Structured lessons, key takeaways, exercises, reflections, and progress tracking.</span></li>
+              <li><i class="fa-solid fa-circle-check"></i><span>Designed for beginners and serious seekers who want spiritual depth with conceptual clarity.</span></li>
+              <li><i class="fa-solid fa-circle-check"></i><span>One-to-one or small-group guidance depending on learner readiness and availability.</span></li>
+            </ul>
+          </article>
+
+          <article class="course-card" data-aos="fade-left">
+            <div class="eyebrow">Founding learner contribution</div>
+            <h3>Course access for early students</h3>
+            <div class="pricing-grid">
+              <div class="price-box">
+                <span>Indian seekers</span>
+                <strong>₹5,001</strong>
+                <small>Founding learner contribution</small>
+              </div>
+              <div class="price-box">
+                <span>International seekers</span>
+                <strong>$108</strong>
+                <small>Founding learner contribution</small>
+              </div>
+            </div>
+            <p>
+              Includes guided sessions, VedhicAstra learning platform access, structured lessons,
+              key takeaways, reflection exercises, practical observation exercises, quizzes, and progress tracking.
+            </p>
+            <a class="btn btn-primary" href="#waitlist"><i class="fa-solid fa-arrow-right"></i> Request Course Details</a>
+          </article>
+        </div>
+
+        <div class="grid-3 course-modules">
+          <article class="feature-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="icon-box"><i class="fa-solid fa-sun"></i></div>
+            <h3>Modules 1–2</h3>
+            <p>Jyotisha as Vedanga, Navagraha as spiritual forces, grahas, rashis, bhavas, and foundational chart observation.</p>
+          </article>
+          <article class="feature-card" data-aos="fade-up" data-aos-delay="80">
+            <div class="icon-box"><i class="fa-solid fa-moon"></i></div>
+            <h3>Modules 3–4</h3>
+            <p>Nakshatras, spiritual psychology, chart formats, Lagna, Sun-Moon-Lagna triad, and house lords.</p>
+          </article>
+          <article class="feature-card" data-aos="fade-up" data-aos-delay="160">
+            <div class="icon-box"><i class="fa-solid fa-hands-praying"></i></div>
+            <h3>Modules 5–6</h3>
+            <p>Dashas, transits, timing awareness, remedies, mantra, seva, lifestyle discipline, and sadhana alignment.</p>
+          </article>
+        </div>
+
+        <div class="philosophy-strip" data-aos="fade-up">
+          <div class="philosophy-item"><i class="fa-solid fa-book-open"></i><strong>Learning before prediction</strong></div>
+          <div class="philosophy-item"><i class="fa-solid fa-eye"></i><strong>Context before conclusion</strong></div>
+          <div class="philosophy-item"><i class="fa-solid fa-seedling"></i><strong>Reflection before judgment</strong></div>
+          <div class="philosophy-item"><i class="fa-solid fa-lotus"></i><strong>Spiritual alignment over fear</strong></div>
+        </div>
+      </div>
+    </section>
+
     <section id="status">
       <div class="container">
         <div class="status-wrap">
@@ -1002,10 +1242,10 @@
         <div class="waitlist-card" data-aos="zoom-in">
           <div>
             <div class="eyebrow">Early access</div>
-            <h2>Want to try VedhicAstra?</h2>
+            <h2>Want to explore VedhicAstra?</h2>
             <p>
-              Join the early access list and we’ll reach out when the upgraded experience is available.
-              You can also connect on LinkedIn for ongoing Vedic astrology research and professional guidance posts.
+              Request early access to the VedhicAstra app, course details for Jyotisha Foundations as Spiritual Sadhana,
+              or personal guidance information. You can also connect on LinkedIn for ongoing Vedic astrology research posts.
             </p>
           </div>
 
@@ -1013,9 +1253,9 @@
             <div class="form-row">
               <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" />
               <input id="email" name="email" type="email" placeholder="Your email" autocomplete="email" />
-              <textarea id="message" name="message" placeholder="What guidance are you looking for? Career, finance, timing, personal growth..."></textarea>
+              <textarea id="message" name="message" placeholder="Are you interested in the AI app, Jyotisha course, or personal guidance? Please share your background and intention..."></textarea>
             </div>
-            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Request Early Access</button>            
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Request</button>            
           </form>
         </div>
       </div>
@@ -1033,7 +1273,7 @@
     </div>
   </footer>
 
-  <div class="toast" id="toast">Opening your email app with the early access request...</div>
+  <div class="toast" id="toast">Opening your email app with the VedhicAstra request...</div>
 
   <!-- JS CDNs -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -1101,7 +1341,7 @@
       const email = document.getElementById("email").value.trim();
       const message = document.getElementById("message").value.trim();
 
-      const subject = encodeURIComponent("VedhicAstra Early Access Request");
+      const subject = encodeURIComponent("VedhicAstra Inquiry - App / Course / Guidance");
       const body = encodeURIComponent(
         `Hello VedhicAstra Team,\n\nI would like to join early access.\n\nName: ${name || "-"}\nEmail: ${email || "-"}\nInterest / Guidance Needed: ${message || "-"}\n\nRegards,\n${name || ""}`
       );
