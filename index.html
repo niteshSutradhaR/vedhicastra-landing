@@ -1188,6 +1188,7 @@
       border-color: #f3c91b;
       background: rgba(253, 210, 31, 0.06);
       color: #f3c91b;
+      ;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.025);
     }
 
@@ -1850,11 +1851,11 @@
 
           <form class="waitlist-form" id="waitlistForm">
             <div class="form-row">
-              <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" />
-              <input id="email" name="email" type="email" placeholder="Your email" autocomplete="email" />
+              <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required />
+              <input id="email" name="email" type="email" placeholder="Your email" autocomplete="email" required />
               <textarea id="message" name="message" placeholder="Are you interested in the AI app, Jyotisha course, or personal guidance? Please share your background and intention..."></textarea>
             </div>
-            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Request</button>            
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Request</button>
           </form>
         </div>
       </div>
@@ -1873,7 +1874,7 @@
     </div>
   </footer>
 
-  <div class="toast" id="toast">Opening your email app with the VedhicAstra request...</div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <!-- JS CDNs -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -1927,27 +1928,51 @@
     document.getElementById("year").textContent = new Date().getFullYear();
 
     const form = document.getElementById("waitlistForm");
+    const submitBtn = form.querySelector('button[type="submit"]');
     const toast = document.getElementById("toast");
 
-    function showToast() {
+    function showToast(message) {
+      toast.textContent = message;
       toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 3200);
+      setTimeout(() => toast.classList.remove("show"), 4000);
     }
 
-    form.addEventListener("submit", event => {
+    form.addEventListener("submit", async event => {
       event.preventDefault();
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const message = document.getElementById("message").value.trim();
+      if (!form.reportValidity()) return;
 
-      const subject = encodeURIComponent("VedhicAstra Inquiry - App / Course / Guidance");
-      const body = encodeURIComponent(
-        `Hello VedhicAstra Team,\n\nI would like to join early access.\n\nName: ${name || "-"}\nEmail: ${email || "-"}\nInterest / Guidance Needed: ${message || "-"}\n\nRegards,\n${name || ""}`
-      );
+      const formData = new FormData(form);
+      formData.append("access_key", "d080ca6a-0da7-4b32-9608-4d9834636c9d");
+      formData.append("subject", "New VedhicAstra Early Access Request");
+      formData.append("from_name", "VedhicAstra Website");
 
-      showToast();
-      window.location.href = `mailto:support@vedhicastra.com?subject=${subject}&body=${body}`;
+      const originalHTML = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          form.reset();
+          showToast("Thank you! Your VedhicAstra request has been received.");
+        } else {
+          console.error("Web3Forms error:", data);
+          showToast(data.message || "Unable to send your request. Please try again.");
+        }
+      } catch (error) {
+        console.error("Form submission error:", error);
+        showToast("Something went wrong. Please try again or email support@vedhicastra.com.");
+      } finally {
+        submitBtn.innerHTML = originalHTML;
+        submitBtn.disabled = false;
+      }
     });
   </script>
 </body>
